@@ -1,0 +1,27 @@
+{
+  "presets": [
+    ["env", {
+      "targets": { "node": "7.4.0" },
+      "useBuiltIns": true
+    }],
+    "es2017",
+    "react"
+  ],
+  "plugins": [
+    "add-module-exports",
+    "dynamic-import-webpack",
+    "transform-class-properties",
+    "transform-es2015-classes",
+    "transform-object-rest-spread",
+    ["flow-runtime", {
+      "assert": true,
+      "annotate": true
+    }]
+  ],
+  "env": {
+    "production": {
+      "presets": ["react-optimize"],
+      "plugins": ["babel-plugin-dev-expression"]
+    }
+  }
+}

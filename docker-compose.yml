@@ -1,0 +1,10 @@
+version: "3"
+services:
+  package:
+    image: electronuserland/electron-builder
+    command: bin/package-linux
+    volumes:
+      - .:/project
+      - node_modules:/project/node_modules
+volumes:
+  node_modules:
