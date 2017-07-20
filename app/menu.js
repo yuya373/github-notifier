@@ -181,8 +181,13 @@ module.exports = class MenuBuilder {
           shell.openExternal('https://github.com/atom/electron/issues');
         }
       }]
+    }, {
+      label: "Back",
+      click: () => this.mainWindow.webContents.goBack()
+    }, {
+      label: "Forward",
+      click: () => this.mainWindow.webContents.goForward()
     }];
-
     return templateDefault;
   }
-}
+};
