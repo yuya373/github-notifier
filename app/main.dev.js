@@ -13,12 +13,18 @@
 const electron = require('electron');
 const MenuBuilder = require('./menu.js');
 const configureStore = require('./store/configureStore.js');
+const storage = require('./utils/storage.js');
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
+console.log("userData", app.getPath('userData'));
+
+storage.fetchState(
+  (initialState) => configureStore({savedState: initialState}, "main")
+);
+
 let mainWindow = null;
-configureStore(global.state, "main");
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');

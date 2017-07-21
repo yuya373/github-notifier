@@ -106,8 +106,8 @@ module.exports = class MenuBuilder {
     };
 
     const subMenuView = process.env.NODE_ENV === 'development'
-      ? subMenuViewDev
-      : subMenuViewProd;
+          ? subMenuViewDev
+          : subMenuViewProd;
 
     return [
       subMenuAbout,
@@ -183,9 +183,11 @@ module.exports = class MenuBuilder {
       }]
     }, {
       label: "Back",
+      accelerator: 'Alt+Ctrl+H',
       click: () => this.mainWindow.webContents.goBack()
     }, {
       label: "Forward",
+      accelerator: 'Alt+Ctrl+L',
       click: () => this.mainWindow.webContents.goForward()
     }];
     return templateDefault;
