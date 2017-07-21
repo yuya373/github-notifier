@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import SimpleFormat from 'react-simple-format';
 import IssueRow from './IssueRow.js.jsx';
 
@@ -23,10 +24,6 @@ function takeLatest(items, n = TOGGLE_THRESHOLD) {
 export default class Repository extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      displayAllIssues: false,
-      displayAllPullRequests: false,
-    };
   }
 
   handleClickReload(e) {
@@ -40,36 +37,13 @@ export default class Repository extends Component {
     this.props.clickReload(login, repository.name);
   }
 
-  hideIssues(e) {
-    e.preventDefault();
-    this.setState({displayAllIssues: false});
-  }
-
-  displayAllIssues(e) {
-    e.preventDefault();
-    this.setState({displayAllIssues: true});
-  }
-
-  hidePullRequests(e) {
-    e.preventDefault();
-    this.setState({displayAllPullRequests: false});
-  }
-
-  displayAllPullRequests(e) {
-    e.preventDefault();
-    this.setState({displayAllPullRequests: true});
-  }
-
-  renderList(items, type = 'issue') {
-    const {displayAllPullRequests, displayAllIssues} = this.state;
-    const displayAll = type === 'issue' ? displayAllIssues : displayAllPullRequests;
+  renderList(items) {
     const {repository} = this.props;
-    items = displayAll ? sortItems(items).reverse() : takeLatest(items);
 
     return (
       <ul className="list-group">
         {
-          items.map((e) => (
+          takeLatest(items).map((e) => (
             <IssueRow
               key={e.number}
               repositoryName={repository.name}
@@ -79,54 +53,6 @@ export default class Repository extends Component {
           ))
         }
       </ul>
-    );
-  }
-
-  renderIssueToggle() {
-    const {repository} = this.props;
-
-    if (!repository.issues.nodes) return null;
-    if (repository.issues.nodes.length < TOGGLE_THRESHOLD) return null;
-
-    const {displayAllIssues} = this.state;
-
-    const label = displayAllIssues ? "Hide Issues" : "Display All Issues";
-    const onClick = displayAllIssues ?
-          (e) => this.hideIssues(e) : (e) => this.displayAllIssues(e);
-
-    return (
-      <p className="text-right">
-        <a
-          href=""
-          onClick={onClick}
-          >
-          {label}
-        </a>
-      </p>
-    );
-  }
-
-  renderPullRequestToggle() {
-    const {repository} = this.props;
-    if (!repository.pullRequests.nodes) return null;
-    if (repository.pullRequests.nodes.length < TOGGLE_THRESHOLD) return null;
-
-    const {displayAllPullRequests} = this.state;
-    const label = displayAllPullRequests ?
-          "Hide Pull Requests" :  "Display All Pull Requests";
-    const onClick = displayAllPullRequests ?
-          (e) => this.hidePullRequests(e) :
-          (e) => this.displayAllPullRequests(e);
-
-    return (
-      <p className="text-right">
-        <a
-          href=""
-          onClick={onClick}
-          >
-          {label}
-        </a>
-      </p>
     );
   }
 
@@ -162,7 +88,11 @@ export default class Repository extends Component {
             </span>
           </h2>
           {this.renderList(repository.issues.nodes)}
-          {this.renderIssueToggle()}
+          <div className="text-right">
+            <Link to={`/repositories/${repository.nameWithOwner}/issues`} >
+              View All Issues
+            </Link>
+          </div>
         </div>
 
         <div>
@@ -172,8 +102,12 @@ export default class Repository extends Component {
               {repository.pullRequests.totalCount}
             </span>
           </h2>
-          {this.renderList(repository.pullRequests.nodes, "pullRequest")}
-          {this.renderPullRequestToggle()}
+          {this.renderList(repository.pullRequests.nodes)}
+          <div className="text-right">
+            <Link to={`/repositories/${repository.nameWithOwner}/pullRequests`} >
+              View All Pull Requests
+            </Link>
+          </div>
         </div>
       </div>
     );
