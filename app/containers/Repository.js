@@ -16,6 +16,11 @@ export default connect(
     error: findError(state, props.match.params),
   }),
   (dispatch) => ({
-    clickReload: (owner, name) => dispatch({type: "REPOSITORY_CLICK_RELOAD", payload: {owner, name}})
+    clickReload: (owner, name) =>
+      dispatch({type: "REPOSITORY_CLICK_RELOAD", payload: {owner, name}}),
+    handleClickIssue: ({owner, name, number}) =>
+      dispatch({type: "LOAD_ISSSUE", payload: {owner, name, number}}),
+    handleClickPullRequest: ({owner, name, number}) =>
+      dispatch({type: "LOAD_PULL_REQUEST", payload: {owner, name, number}}),
   })
 )(Repository);

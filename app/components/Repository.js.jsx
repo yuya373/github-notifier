@@ -37,8 +37,10 @@ export default class Repository extends Component {
     this.props.clickReload(login, repository.name);
   }
 
-  renderList(items) {
+  renderList(items, onClickIssue) {
     const {repository} = this.props;
+    const name = repository.name;
+    const owner = repository.owner.login;
 
     return (
       <ul className="list-group">
@@ -46,8 +48,9 @@ export default class Repository extends Component {
           takeLatest(items).map((e) => (
             <IssueRow
               key={e.number}
-              repositoryName={repository.name}
-              repositoryOwner={repository.owner.login}
+              repositoryName={name}
+              repositoryOwner={owner}
+              onClickIssue={(args) => onClickIssue(args)}
               {...e}
               />
           ))
@@ -87,7 +90,7 @@ export default class Repository extends Component {
               {repository.issues.totalCount}
             </span>
           </h2>
-          {this.renderList(repository.issues.nodes)}
+          {this.renderList(repository.issues.nodes, this.props.handleClickIssue)}
           <div className="text-right">
             <Link to={`/repositories/${repository.nameWithOwner}/issues`} >
               View All Issues
@@ -102,7 +105,7 @@ export default class Repository extends Component {
               {repository.pullRequests.totalCount}
             </span>
           </h2>
-          {this.renderList(repository.pullRequests.nodes)}
+          {this.renderList(repository.pullRequests.nodes, this.props.handleClickPullRequest)}
           <div className="text-right">
             <Link to={`/repositories/${repository.nameWithOwner}/pullRequests`} >
               View All Pull Requests
