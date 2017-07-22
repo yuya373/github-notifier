@@ -23,6 +23,7 @@ const onSuccess = ({data}, isIssue, old) => {
           ...comments.nodes,
         ],
         pageInfo: comments.pageInfo,
+        totalCount: comments.totalCount,
       },
       rateLimit,
     };

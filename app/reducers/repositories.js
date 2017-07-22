@@ -36,10 +36,11 @@ const updateComment = (values, {owner, name, number, isIssue, comments}) => {
       ...issue,
       comments: {
         nodes: [
-          ...issue.comments.nodes,
+          ...issue.comments.nodes.filter((e) => comments.nodes.find((f) => f.id !== e.id)),
           ...comments.nodes,
         ],
         pageInfo: comments.pageInfo,
+        totalCount: comments.totalCount,
       },
     };
     return nodes.filter((e) => e.number !== number).
