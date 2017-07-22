@@ -2,7 +2,10 @@ import React from 'react';
 import Link from './nav/Link.js.jsx';
 import Icon from './Icon.js.jsx';
 
-export default function Nav({location, repositories}) {
+export default function Nav({
+  location, repositories,
+  clearRepositories,
+}) {
   const renderRepositories = () => repositories.map((e) => (
     <div key={e.nameWithOwner} >
       <Link to={`/repositories/${e.nameWithOwner}`} location={location} >
@@ -29,6 +32,18 @@ export default function Nav({location, repositories}) {
     </div>
   ));
 
+  const renderClearRepository = () => {
+    if (process.env.NODE_ENV === "production") return null;
+    return (
+      <a
+        className="nav-group-item"
+        onClick={clearRepositories}
+        >
+        Clear Repositories
+      </a>
+    );
+  };
+
   return (
     <nav className="nav-group">
       <h5 className="nav-group-title">
@@ -49,6 +64,7 @@ export default function Nav({location, repositories}) {
       <Link to="/token" location={location} >
         <Icon name="icon-key" /> Token
       </Link>
+      {renderClearRepository()}
     </nav>
   );
 }
