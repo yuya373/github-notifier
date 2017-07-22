@@ -514,120 +514,334 @@ img {
 
 
 .alert {
-  padding: 0.75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
 }
 
 .alert-primary {
-  color: #004085;
-  background-color: #cce5ff;
-  border-color: #b8daff;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
 }
 
 .alert-primary hr {
-  border-top-color: #9fcdff;
+    border-top-color: #9fcdff;
 }
 
 .alert-primary .alert-link {
-  color: #002752;
+    color: #002752;
 }
 
 .alert-secondary {
-  color: #464a4e;
-  background-color: #e7e8ea;
-  border-color: #dddfe2;
+    color: #464a4e;
+    background-color: #e7e8ea;
+    border-color: #dddfe2;
 }
 
 .alert-secondary hr {
-  border-top-color: #cfd2d6;
+    border-top-color: #cfd2d6;
 }
 
 .alert-secondary .alert-link {
-  color: #2e3133;
+    color: #2e3133;
 }
 
 .alert-success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
 }
 
 .alert-success hr {
-  border-top-color: #b1dfbb;
+    border-top-color: #b1dfbb;
 }
 
 .alert-success .alert-link {
-  color: #0b2e13;
+    color: #0b2e13;
 }
 
 .alert-info {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
 }
 
 .alert-info hr {
-  border-top-color: #abdde5;
+    border-top-color: #abdde5;
 }
 
 .alert-info .alert-link {
-  color: #062c33;
+    color: #062c33;
 }
 
 .alert-warning {
-  color: #856404;
-  background-color: #fff3cd;
-  border-color: #ffeeba;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
 }
 
 .alert-warning hr {
-  border-top-color: #ffe8a1;
+    border-top-color: #ffe8a1;
 }
 
 .alert-warning .alert-link {
-  color: #533f03;
+    color: #533f03;
 }
 
 .alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
 }
 
 .alert-danger hr {
-  border-top-color: #f1b0b7;
+    border-top-color: #f1b0b7;
 }
 
 .alert-danger .alert-link {
-  color: #491217;
+    color: #491217;
 }
 
 .alert-light {
-  color: #818182;
-  background-color: #fefefe;
-  border-color: #fdfdfe;
+    color: #818182;
+    background-color: #fefefe;
+    border-color: #fdfdfe;
 }
 
 .alert-light hr {
-  border-top-color: #ececf6;
+    border-top-color: #ececf6;
 }
 
 .alert-light .alert-link {
-  color: #686868;
+    color: #686868;
 }
 
 .alert-dark {
-  color: #1b1e21;
-  background-color: #d6d8d9;
-  border-color: #c6c8ca;
+    color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca;
 }
 
 .alert-dark hr {
-  border-top-color: #b9bbbe;
+    border-top-color: #b9bbbe;
 }
 
 .alert-dark .alert-link {
-  color: #040505;
+    color: #040505;
+}
+
+pre,
+code,
+kbd,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+}
+
+pre {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    overflow: auto;
+}
+
+figure {
+    margin: 0 0 1rem;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+code {
+    padding: 0.2rem 0.4rem;
+    font-size: 90%;
+    color: #bd4147;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+}
+
+a > code {
+    padding: 0;
+    color: inherit;
+    background-color: inherit;
+}
+
+kbd {
+    padding: 0.2rem 0.4rem;
+    font-size: 90%;
+    color: #fff;
+    background-color: #212529;
+    border-radius: 0.2rem;
+}
+
+kbd kbd {
+    padding: 0;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 90%;
+    color: #212529;
+}
+
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.pre-scrollable {
+    max-height: 340px;
+    overflow-y: scroll;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.col-auto {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+}
+
+.col-1 {
+    -ms-flex: 0 0 8.333333%;
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%;
+}
+
+.col-2 {
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+}
+
+.col-3 {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.col-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.col-5 {
+    -ms-flex: 0 0 41.666667%;
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+}
+
+.col-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.col-7 {
+    -ms-flex: 0 0 58.333333%;
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+}
+
+.col-8 {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.col-9 {
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%;
+}
+
+.col-10 {
+    -ms-flex: 0 0 83.333333%;
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%;
+}
+
+.col-11 {
+    -ms-flex: 0 0 91.666667%;
+    flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+}
+
+.col-12 {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (min-width: 576px) {
+  .container {
+    width: 540px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 720px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 960px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1140px;
+    max-width: 100%;
+  }
 }

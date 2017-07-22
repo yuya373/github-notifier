@@ -76,7 +76,7 @@ export default function Issue({
   );
 
   return (
-    <div>
+    <div className="container">
       <h1>
         <span>
           {title}
@@ -100,11 +100,8 @@ export default function Issue({
         </span>
       </h4>
 
-      <div
-        style={{display: "flex"}}
-        className="pt-30"
-        >
-        <div style={{flex: "6"}}>
+      <div className="pt-30 row" >
+        <div className="col-8" >
           <Comment
             author={author}
             commentedAt={publishedAt || createdAt}
@@ -112,7 +109,7 @@ export default function Issue({
             />
           {commentComponents}
         </div>
-        <div style={{flex: "4"}} >
+        <div className="col-2" >
           <div className="ml-30">
             {renderReviewers()}
             <h4>

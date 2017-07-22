@@ -5,22 +5,16 @@ export default function Comment({
   body, author, commentedAt,
 }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-      }}
-      >
-      <div style={{flex: "none", marginRight: "20px"}} >
+    <div className="row" >
+      <div className="col-1" >
         <img
           src={author.avatarUrl}
           alt={author.login}
           style={{width: "44px"}}
           />
       </div>
-      <div style={{flex: "1"}} >
-        <div className="card">
+      <div className="col-11" >
+        <div className="card" style={{maxWidth: "1080px"}}>
           <div className="card-header">
             <span className="font-weight-bold" >
               {author.login}
