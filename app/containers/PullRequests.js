@@ -8,5 +8,9 @@ export default connect(
     ...findRepositoryFromMatch(state, props.match).pullRequests,
     repositoryName: props.match.params.name,
     repositoryOwner: props.match.params.owner,
+  }),
+  (dispatch) => ({
+    handleClickPullRequest: ({owner, name, number}) =>
+      dispatch({type: "LOAD_PULL_REQUEST", payload: {owner, name, number}}),
   })
 )(PullRequests);

@@ -3,6 +3,7 @@ import IssueRow from './IssueRow.js.jsx';
 
 export default function Issue({
   nodes, totalCount, repositoryName, repositoryOwner,
+  handleClickIssue,
 }) {
   const renderIssues = () => nodes.
         sort((a, b) => b.number - a.number).
@@ -12,6 +13,7 @@ export default function Issue({
             repositoryName={repositoryName}
             repositoryOwner={repositoryOwner}
             {...e}
+            onClickIssue={(args) => handleClickIssue(args)}
             />
         ));
 

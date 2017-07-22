@@ -3,6 +3,7 @@ import IssueRow from './IssueRow.js.jsx';
 
 export default function PullRequests({
   nodes, totalCount, repositoryName, repositoryOwner,
+  handleClickPullRequest,
 }) {
   const renderList = () => nodes.sort((a, b) => b.number - a.number).map((e) => (
     <IssueRow
@@ -10,6 +11,7 @@ export default function PullRequests({
       repositoryName={repositoryName}
       repositoryOwner={repositoryOwner}
       {...e}
+      onClickIssue={(args) => handleClickPullRequest(args)}
       />
   ));
 

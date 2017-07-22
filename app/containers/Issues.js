@@ -7,5 +7,9 @@ export default connect(
     ...findRepositoryFromMatch(state, props.match).issues,
     repositoryName: props.match.params.name,
     repositoryOwner: props.match.params.owner,
+  }),
+  (dispatch) => ({
+    handleClickIssue: ({owner, name, number}) =>
+      dispatch({type: "LOAD_ISSSUE", payload: {owner, name, number}}),
   })
 )(Issues);

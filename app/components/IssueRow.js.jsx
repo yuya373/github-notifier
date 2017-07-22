@@ -5,6 +5,7 @@ import {formatTime} from './../utils/date.js';
 export default function IssueRow({
   title, number, createdAt, publishedAt, author, assignees, reviews,
   comments, repositoryName, repositoryOwner,
+  onClickIssue,
 }) {
   const renderAssignee = (assignee, i) => (
     <span
@@ -45,9 +46,16 @@ export default function IssueRow({
       <p>Reviews: {reviews.nodes.map(renderReview)}</p>
     );
   };
+
+  const handleClickIssue = () =>
+        onClickIssue({owner: repositoryOwner, name: repositoryName, number});
+
   return (
     <li className="list-group-item" >
-      <Link to={`/repositories/${repositoryOwner}/${repositoryName}/${number}`} >
+      <Link
+        onClick={handleClickIssue}
+        to={`/repositories/${repositoryOwner}/${repositoryName}/${number}`}
+        >
         <div className="media-body float-left" style={{width: "90%"}}>
           <h4>{title}</h4>
           <p className="text-muted">
