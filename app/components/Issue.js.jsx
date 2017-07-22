@@ -1,6 +1,7 @@
 import React from 'react';
 import {formatTime} from './../utils/date.js';
 import Comment from './Comment.js.jsx';
+import ReviewComment from './ReviewComment.js.jsx';
 
 export default function Issue({
   title, number, state, author, publishedAt, createdAt,
@@ -75,6 +76,29 @@ export default function Issue({
     </li>
   );
 
+  const renderPullRequestReviews = () => {
+    if (isIssue) return null;
+
+    // TODO fetch ReviewComment.comments.nodes at Load
+    return (
+      <div>
+        <h4>
+          Review Comments
+        </h4>
+        {reviews.nodes.map((e) => (
+          <ReviewComment
+            key={e.id}
+            state={e.state}
+            author={e.author}
+            body={e.body}
+            commentedAt={e.lastEditedAt || e.publishedAt}
+            comments={e.comments}
+            />
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div className="container">
       <h1>
@@ -108,6 +132,7 @@ export default function Issue({
             body={body}
             />
           {commentComponents}
+          {renderPullRequestReviews()}
         </div>
         <div className="col-2" >
           <div className="ml-30">
