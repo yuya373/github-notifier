@@ -7,6 +7,7 @@ import ReactionConnection from './fragments/ReactionConnection.js';
 import PageInfo from './fragments/PageInfo.js';
 import PullRequestReviewConnection from './fragments/PullRequestReviewConnection.js';
 import Comment from './fragments/Comment.js';
+import RateLimit from './fragments/RateLimit.js';
 
 const query = `
 query repository(
@@ -150,12 +151,7 @@ query repository(
       totalCount
     }
   }
-  rateLimit {
-    limit
-    cost
-    remaining
-    resetAt
-  }
+  ${RateLimit}
 }
 `;
 
