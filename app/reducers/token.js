@@ -1,5 +1,5 @@
 const initialState = (savedState) => ({
-  value: savedState.value,
+  value: savedState ? savedState.value : "",
 });
 
 export default function(state, action, savedState) {
