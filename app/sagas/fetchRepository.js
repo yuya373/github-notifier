@@ -32,8 +32,7 @@ function* fetchRepository({payload}) {
     yield put({
       type: "ADD_REPOSITORY_FETCH_FAILED",
       payload: {
-        name: payload.name,
-        owner: payload.owner,
+        ...ownerAndName,
         error: response.error.toString()
       },
       error: true,

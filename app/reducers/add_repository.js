@@ -45,7 +45,7 @@ export default function(state, action, savedState) {
       ...state,
       fetching: false,
       success: false,
-      error: action.payload,
+      error: action.payload.error,
     };
   default:
     return state;

@@ -7,16 +7,15 @@ type Props = {
     owner: string,
     name: string
   },
-  success: boolean,
   error: string,
   fetching: boolean,
   onOwnerChange: (value: string) => void,
   onNameChange: (value: string) => void,
-  onAdd: () => void,
+  onAdd: () => void
 };
 
 export default function AddRepository({
-  form, success, error, fetching,
+  form, error, fetching,
   onOwnerChange, onNameChange, onAdd,
 }: Props) {
   const handleClickAdd = (e) => {
@@ -25,7 +24,7 @@ export default function AddRepository({
   };
 
   const errorMessage =
-        error.length > 1 ? (<p>{error}</p>) : null;
+        error.length > 1 ? (<div className="alert alert-danger">{error}</div>) : null;
   return (
     <form>
       {errorMessage}
