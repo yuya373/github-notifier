@@ -9,7 +9,11 @@ function* save() {
 
 export default function* () {
   yield takeLatest(
-    [LOCATION_CHANGE, 'TOKEN_CHANGED'],
+    [
+      LOCATION_CHANGE,
+      'TOKEN_CHANGED',
+      "FETCH_COMMENT_SUCCESS",
+    ],
     save
   );
 }
