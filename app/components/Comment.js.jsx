@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import CommentHeader from './CommentHeader.js.jsx';
 
 export default function Comment({
   body, author, commentedAt,
@@ -16,11 +17,10 @@ export default function Comment({
       <div className="col-11" >
         <div className="card" style={{maxWidth: "1080px"}}>
           <div className="card-header">
-            <span className="font-weight-bold" >
-              {author.login}
-            </span>
-            {" commented on "}
-            {commentedAt}
+            <CommentHeader
+              author={author}
+              commentedAt={commentedAt}
+              />
           </div>
 
           <div className="card-block">
