@@ -1,3 +1,6 @@
+import {findRepositoryFromNameWithOwner} from './../utils/findRepository.js';
+import {findIssueFromNumber} from './../utils/findIssue.js';
+
 const initialState = (savedState) => ({
   ids: savedState.ids || [],
   values: savedState.values || [],
@@ -26,6 +29,40 @@ const filterIdsFromRepository = (ids, {name, owner}) =>
 const filterErrors = (errors, {owner, name}) =>
       errors.filter((e) => e.id !== `${owner}/${name}`);
 
+const updateComment = (values, {owner, name, number, isIssue, comments}) => {
+  const update = (nodes) => {
+    const issue = findIssueFromNumber(nodes, number);
+    const newIssue = {
+      ...issue,
+      comments: {
+        nodes: [
+          ...issue.comments.nodes,
+          ...comments.nodes,
+        ],
+        pageInfo: comments.pageInfo,
+      },
+    };
+    return nodes.filter((e) => e.number !== number).
+      concat([newIssue]);
+  };
+
+  const repository = findRepositoryFromNameWithOwner(values, {name, owner});
+  const newRepository = {
+    ...repository,
+    issues: {
+      ...repository.issues,
+      nodes: isIssue ? update(repository.issues.nodes) : repository.issues.nodes,
+    },
+    pullRequests: {
+      ...repository.pullRequests,
+      nodes: isIssue ? repository.pullRequests.nodes : update(repository.pullRequests.nodes),
+    },
+  };
+
+  return values.filter((e) => e.nameWithOwner !== `${owner}/${name}`).
+    concat([newRepository]);
+};
+
 
 export default function(state, action, savedState) {
   if (!state) state = initialState(savedState || {});
@@ -52,6 +89,11 @@ export default function(state, action, savedState) {
         id: `${action.payload.owner}/${action.payload.name}`,
         error: action.payload.error,
       })
+    };
+  case "FETCH_COMMENT_SUCCESS":
+    return {
+      ...state,
+      values: updateComment(state.values, action.payload),
     };
   default:
     return state;

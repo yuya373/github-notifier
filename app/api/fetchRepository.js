@@ -1,18 +1,17 @@
 // @flow
-import {post} from 'axios';
+import post from './util/post.js';
 import buildQuery from './../query/repository.js';
-
-const url: string = "https://api.github.com/graphql";
+import onError from './util/onError.js';
 
 const mergeRepository = (repo, old) => ({
   ...repo,
   issues: {
     nodes: [
-      ...old.issues.nodes,
+      ...(old ? old.issues.nodes : []),
       ...(repo.issues ? repo.issues.nodes : []),
     ],
     pageInfo: {
-      ...old.issues.pageInfo,
+      ...(old ? old.issues.pageInfo : {}),
       ...(repo.issues ? repo.issues.pageInfo : {}),
     },
     totalCount: repo.issues ?
@@ -20,11 +19,11 @@ const mergeRepository = (repo, old) => ({
   },
   pullRequests: {
     nodes: [
-      ...old.pullRequests.nodes,
+      ...(old ? old.pullRequests.nodes : []),
       ...(repo.pullRequests ? repo.pullRequests.nodes : []),
     ],
     pageInfo: {
-      ...old.pullRequests.pageInfo,
+      ...(old ? old.pullRequests.pageInfo : {}),
       ...(repo.pullRequests ? repo.pullRequests.pageInfo : {}),
     },
     totalCount: repo.pullRequests ?
@@ -47,15 +46,6 @@ const onSuccess = (resp, repository) => {
   }
 };
 
-const onError = (error) => {
-  const {message, documentation_url} = error.response.data;
-
-  return ({
-    success: false,
-    error: new Error(`${message}`),
-  });
-};
-
 function paginate({success, repository, rateLimit, error}, {owner, name, issueOrderDirection, pullRequestOrderDirection}, token) {
   if (!success) return {success, error};
 
@@ -63,8 +53,6 @@ function paginate({success, repository, rateLimit, error}, {owner, name, issueOr
   const hasMoreIssues = issuePageInfo && issuePageInfo.hasPreviousPage;
   const pullRequestPageInfo = repository.pullRequests.pageInfo;
   const hasMorePullRequests = pullRequestPageInfo && pullRequestPageInfo.hasPreviousPage;
-
-  console.log("hasMorePullRequests", hasMorePullRequests, "hasMoreIssues", hasMoreIssues);
 
   if (hasMorePullRequests || hasMoreIssues) {
     const pullRequestBefore = pullRequestPageInfo && pullRequestPageInfo.startCursor;
@@ -92,19 +80,15 @@ function paginate({success, repository, rateLimit, error}, {owner, name, issueOr
   }
 }
 
-export default function fetchRepository(param: {owner: string, name: string}, token: string, repository = undefined) {
+export default function fetchRepository(
+  param: {owner: string, name: string},
+  token: string,
+  repository: any = undefined
+) {
   const {query, variables} = buildQuery(param);
-  const params = { query, variables };
 
-  const config = {
-    headers: {
-      "Authorization": `bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  };
-
-  return post(url, params, config).
+  return post({query, variables, token}).
     // then((resp) => onSuccess(resp, repository)).
   then((resp) => paginate(onSuccess(resp, repository), variables, token)).
-    catch((e) => console.log(e));
+    catch(onError);
 }
