@@ -85,9 +85,9 @@ export default function Issue({
         <h4>
           Review Comments
         </h4>
-        {reviews.nodes.map((e) => (
+        {reviews.nodes.map((e, i) => (
           <ReviewComment
-            key={e.id}
+            key={i}
             state={e.state}
             author={e.author}
             body={e.body}
