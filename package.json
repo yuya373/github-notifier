@@ -117,7 +117,6 @@
     "electron-debug": "^1.2.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-json-storage": "^3.0.6",
-    "electron-redux": "^1.2.10",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "eslint": "^3.19.0",
