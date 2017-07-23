@@ -9,6 +9,7 @@ import Repository from './containers/Repository.js';
 import Issue from './containers/Issue.js';
 import PullRequests from './containers/PullRequests.js';
 import Issues from './containers/Issues.js';
+import Timers from './containers/Timers.js';
 
 const Routes = () => (
   <div className="window">
@@ -42,6 +43,10 @@ const Routes = () => (
             <Route
               path="/token"
               component={Token}
+              />
+            <Route
+              path="/timers"
+              component={Timers}
               />
             <Route
               path="/"

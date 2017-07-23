@@ -64,6 +64,9 @@ export default function Nav({
       <Link to="/token" location={location} >
         <Icon name="icon-key" /> Token
       </Link>
+      <Link to="/timers" location={location} >
+        <Icon name="icon-clock" /> Timers
+      </Link>
       {renderClearRepository()}
     </nav>
   );
