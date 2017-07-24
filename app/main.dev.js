@@ -66,8 +66,8 @@ app.on('ready', async () => {
     show: false,
     width: 1024,
     height: 728,
-    'titleBarStyle': 'hidden', //ヘッダーバーを透明にし、ボタンだけ表示
-    'acceptFirstMouse': true,
+    // 'titleBarStyle': 'hidden', //ヘッダーバーを透明にし、ボタンだけ表示
+    // 'acceptFirstMouse': true,
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
