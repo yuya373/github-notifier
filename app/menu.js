@@ -114,7 +114,22 @@ module.exports = class MenuBuilder {
       subMenuEdit,
       subMenuView,
       subMenuWindow,
-      subMenuHelp
+      subMenuHelp,
+      {
+        label: "Control",
+        submenu: [
+          {
+            label: "Back",
+            accelerator: 'Alt+Ctrl+H',
+            click: () => this.mainWindow.webContents.goBack()
+          }, {
+            label: "Forward",
+            accelerator: 'Alt+Ctrl+L',
+            click: () => this.mainWindow.webContents.goForward()
+          }
+        ],
+      },
+
     ];
   }
 
