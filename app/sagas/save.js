@@ -13,6 +13,7 @@ export default function* () {
       LOCATION_CHANGE,
       'TOKEN_CHANGED',
       "FETCH_COMMENT_SUCCESS",
+      "NEW_NOTIFICATION",
     ],
     save
   );
