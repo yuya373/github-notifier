@@ -68,46 +68,121 @@ export default class Repository extends Component {
     );
   }
 
+  renderNewIssues() {
+    const {notification} = this.props;
+    if (!notification) return null;
+    return this.renderList(notification.issue.newArrivals, this.props.handleClickIssue);
+  }
+
+  renderUpdatedIssues() {
+    const {notification} = this.props;
+    if (!notification) return null;
+    return this.renderList(
+      notification.issue.newComments,
+      this.props.handleClickIssue
+    );
+  }
+
+  renderNewPullRequests() {
+    const {notification} = this.props;
+    if (!notification) return null;
+    return this.renderList(
+      notification.pullRequest.newArrivals,
+      this.props.handleClickPullRequest
+    );
+  }
+
+  renderUpdatedPullRequests() {
+    const {notification} = this.props;
+    if (!notification) return null;
+    return this.renderList(
+      notification.pullRequest.newComments,
+      this.props.handleClickPullRequest
+    );
+  }
+
   render() {
-    const {repository, fetching} = this.props;
+    const {repository, fetching, notification} = this.props;
     return (
-      <div>
-        <h1>
-          {repository.name}
-          <a
-            href=""
-            className="ml-20"
-            onClick={(e) => this.handleClickReload(e)}
-            >
-            <i className={`fa fa-refresh ${fetching ? "fa-spin" : ""}`} />
-          </a>
-        </h1>
-        {this.renderError()}
-        <div>
-          <h2>
-            Issues
-            <span className="badge badge-pill badge-default ml-10">
-              {repository.issues.totalCount}
-            </span>
-          </h2>
-          {this.renderList(repository.issues.nodes, this.props.handleClickIssue)}
-          <div className="text-right">
-            <Link to={`/repositories/${repository.nameWithOwner}/issues`} >
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <h1>
+              {repository.name}
+              <a
+                href=""
+                className="ml-20"
+                onClick={(e) => this.handleClickReload(e)}
+                >
+                <i className={`fa fa-refresh ${fetching ? "fa-spin" : ""}`} />
+              </a>
+            </h1>
+          </div>
+          <div className="col-12">
+            {this.renderError()}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <h2>
+              New Issues
+              <span className="badge badge-pill badge-default ml-10">
+                {notification ? notification.issue.newArrivals.length : 0}
+              </span>
+            </h2>
+          </div>
+          <div className="col-12">
+            {this.renderNewIssues()}
+          </div>
+          <div className="col-12">
+            <h2>
+              Updated Issues
+              <span className="badge badge-pill badge-default ml-10">
+                {notification ? notification.issue.newComments.length : 0}
+              </span>
+            </h2>
+          </div>
+          <div className="col-12">
+            {this.renderUpdatedIssues()}
+          </div>
+          <div className="col-12 mt-30 text-right">
+            <Link
+              className="btn btn-default"
+              to={`/repositories/${repository.nameWithOwner}/issues`}
+              >
               View All Issues
             </Link>
           </div>
         </div>
 
-        <div>
-          <h2>
-            Pull Requests
-            <span className="badge badge-pill badge-default ml-10">
-              {repository.pullRequests.totalCount}
-            </span>
-          </h2>
-          {this.renderList(repository.pullRequests.nodes, this.props.handleClickPullRequest)}
-          <div className="text-right">
-            <Link to={`/repositories/${repository.nameWithOwner}/pullRequests`} >
+        <div className="row">
+          <div className="col-12">
+            <h2>
+              New Pull Requests
+              <span className="badge badge-pill badge-default ml-10">
+                {notification ? notification.pullRequest.newArrivals.length : 0}
+              </span>
+            </h2>
+          </div>
+          <div className="col-12">
+            {this.renderNewPullRequests()}
+          </div>
+          <div className="col-12">
+            <h2>
+              Updated Pull Requests
+              <span className="badge badge-pill badge-default ml-10">
+                {notification ? notification.pullRequest.newComments.length : 0}
+              </span>
+            </h2>
+          </div>
+          <div className="col-12">
+            {this.renderUpdatedPullRequests()}
+          </div>
+          <div className="col-12 text-right mt-30">
+            <Link
+              className="btn btn-default"
+              to={`/repositories/${repository.nameWithOwner}/pullRequests`}
+              >
               View All Pull Requests
             </Link>
           </div>
