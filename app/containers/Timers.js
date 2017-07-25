@@ -10,8 +10,10 @@ export default connect(
   (dispatch) => ({
     changeInterval: (interval) =>
       dispatch({type: "TIMERS_CHANGE_INTERVAL", payload: {interval}}),
-    clickStartTimer: ({name, owner}) =>
-      dispatch({type: "TIMERS_START_TIMER", payload: {name, owner}}),
+    clickStartTimer: ({name, owner}) => {
+      dispatch({type: "TIMER_FETCH_REPOSITORY", payload: {name, owner}});
+      dispatch({type: "TIMERS_START_TIMER", payload: {name, owner}});
+    },
     clickStopTimer: ({name, owner}) =>
       dispatch({type: "TIMERS_STOP_TIMER", payload: {name, owner}}),
   })

@@ -13,7 +13,7 @@ function* fetchOwnerAndName(payload) {
   return repo;
 }
 
-function* fetchRepository({payload}) {
+export function* fetch({payload}) {
   const token = yield select((state) => state.token.value);
   const ownerAndName = yield fetchOwnerAndName(payload);
 
@@ -43,6 +43,6 @@ function* fetchRepository({payload}) {
 export default function* () {
   yield takeLatest(
     ['ADD_REPOSITORY_ON_ADD', "REPOSITORY_CLICK_RELOAD"],
-    fetchRepository
+    fetch
   );
 }

@@ -7,7 +7,9 @@ const initState = (savedState) => ({
 
 const stopTimer = (values, name, owner) => {
   const old = values.find((e) => e.name === name && e.owner === owner);
-  if (old) window.clearInterval(old.timer);
+  if (old && old.timer) {
+    window.clearInterval(old.timer);
+  }
 };
 
 const dispatchEvent = (name, owner) => window.store.dispatch({
@@ -33,12 +35,11 @@ const handleStartWatch = (state, {name, owner}) => {
 
   return {
     ...state,
-    values: values.filter((e) => e.name !== name && e.owner !== owner).
-      concat({
-        name,
-        owner,
-        timer: startTimer(state, name, owner),
-      }),
+    values: values.filter((e) => !(e.name === name && e.owner === owner)).concat([{
+      name,
+      owner,
+      timer: startTimer(state, name, owner),
+    }]),
   };
 };
 
